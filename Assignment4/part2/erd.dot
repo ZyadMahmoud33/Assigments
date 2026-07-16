@@ -1,0 +1,67 @@
+graph ERD {
+  graph [fontname="Helvetica", nodesep=0.6, ranksep=0.9, splines=line];
+  node [fontname="Helvetica", fontsize=11];
+  edge [fontname="Helvetica", fontsize=10];
+
+  /* Entities */
+  node [shape=box, style=filled, fillcolor="#cfe2f3", fixedsize=false];
+  MUSICIAN; INSTRUMENT; ALBUM; SONG;
+
+  /* Relationships */
+  node [shape=diamond, style=filled, fillcolor="#fff2cc"];
+  PLAYS; PERFORMS; CONTAINS; PRODUCES;
+
+  /* Attributes */
+  node [shape=ellipse, style=filled, fillcolor="white", fontsize=10];
+
+  m_id       [label=<<U>musician_id</U>>];
+  m_name     [label="name"];
+  m_address  [label="address"];
+  m_street   [label="street"];
+  m_city     [label="city"];
+  m_phone    [label="phone"];
+
+  i_name     [label=<<U>name</U>>];
+  i_key      [label="musical_key"];
+
+  a_id       [label=<<U>album_id</U>>];
+  a_title    [label=<<U>title</U>>];
+  a_copy     [label="copyright_date"];
+
+  s_title    [label=<<U>title</U>>];
+  s_author   [label="author"];
+
+  /* Entity - attribute edges */
+  MUSICIAN -- m_id;
+  MUSICIAN -- m_name;
+  MUSICIAN -- m_address;
+  MUSICIAN -- m_phone;
+  m_address -- m_street;
+  m_address -- m_city;
+
+  INSTRUMENT -- i_name;
+  INSTRUMENT -- i_key;
+
+  ALBUM -- a_id;
+  ALBUM -- a_title;
+  ALBUM -- a_copy;
+
+  SONG -- s_title;
+  SONG -- s_author;
+
+  /* Relationship edges with cardinalities */
+  MUSICIAN -- PLAYS      [label="N"];
+  PLAYS     -- INSTRUMENT [label="M"];
+
+  MUSICIAN -- PERFORMS   [label="N"];
+  PERFORMS  -- SONG       [label="M"];
+
+  ALBUM -- CONTAINS      [label="1"];
+  CONTAINS -- SONG        [label="N"];
+
+  MUSICIAN -- PRODUCES   [label="1"];
+  PRODUCES  -- ALBUM      [label="N"];
+
+  { rank=same; MUSICIAN; INSTRUMENT; }
+  { rank=same; ALBUM; SONG; }
+}
