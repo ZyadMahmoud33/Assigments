@@ -1,0 +1,34 @@
+digraph Schema {
+  rankdir=LR;
+  graph [fontname="Helvetica", nodesep=1.2, ranksep=1.5];
+  node [shape=none, fontname="Helvetica", fontsize=11];
+  edge [fontname="Helvetica", fontsize=10];
+
+  User [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6">
+      <TR><TD BGCOLOR="#cfe2f3"><B>User</B></TD></TR>
+      <TR><TD PORT="id" ALIGN="LEFT"><U>id</U>  (PK)</TD></TR>
+      <TR><TD ALIGN="LEFT">firstName</TD></TR>
+      <TR><TD ALIGN="LEFT">lastName</TD></TR>
+      <TR><TD ALIGN="LEFT">userName</TD></TR>
+      <TR><TD ALIGN="LEFT">phone</TD></TR>
+      <TR><TD ALIGN="LEFT">email</TD></TR>
+      <TR><TD ALIGN="LEFT">role</TD></TR>
+      <TR><TD ALIGN="LEFT">password</TD></TR>
+    </TABLE>
+  >];
+
+  Product [label=<
+    <TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0" CELLPADDING="6">
+      <TR><TD BGCOLOR="#fff2cc"><B>Product</B></TD></TR>
+      <TR><TD PORT="id" ALIGN="LEFT"><U>id</U>  (PK)</TD></TR>
+      <TR><TD ALIGN="LEFT">name</TD></TR>
+      <TR><TD ALIGN="LEFT">stock</TD></TR>
+      <TR><TD ALIGN="LEFT">price</TD></TR>
+      <TR><TD ALIGN="LEFT">isDeleted</TD></TR>
+      <TR><TD PORT="userId" ALIGN="LEFT">userId  (FK -&gt; User.id)</TD></TR>
+    </TABLE>
+  >];
+
+  User:id -> Product:userId [label="1 : n", dir=both, arrowtail=none, arrowhead=crow];
+}
